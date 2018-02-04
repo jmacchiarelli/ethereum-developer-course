@@ -23,7 +23,7 @@ const Web3 = require('web3');
 // Use constructor to make an instance of web3
 // Have to set up a provider to comm between web3 and ethereum network
 
-const web3 = new Web3 (ganache.provider());
+const web3 = new Web3(ganache.provider());
 // Setup local isntance of web3
 // Tells instance to connect to provider
 // Will change over time depending on what network you connect to
@@ -50,9 +50,9 @@ class Car {
 // Writing a class we will attempt to test
 
 describe('Car Class dsafs', () => {
-  it('can park' () => {
+  it('can park', () => {
     const car = new Car();
     assert.equal(car.park(), 'stopped');
   });
 });
-// Car here is just for organiztion purposes
+// Testing if we call park if the string stopped is returned
