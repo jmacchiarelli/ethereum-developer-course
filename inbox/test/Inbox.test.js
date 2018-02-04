@@ -54,5 +54,11 @@ describe('Car Class dsafs', () => {
     const car = new Car();
     assert.equal(car.park(), 'stopped');
   });
+
+  it('can drive', () => {
+    const car = new Car();
+    assert.equal(car.drive(), 'vroom');
+  })
 });
 // Testing if we call park if the string stopped is returned
+// Adding another it statement to test drive
