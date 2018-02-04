@@ -20,8 +20,15 @@ const source = fs.readFileSync(inboxPath, 'utf8');
 // pass in inbox path and specify encoding
 
 
-console.log(solc.compile(source, 1));
+module.exports = solc.compile(source, 1).contracts[':Inbox'];
 // pass in source code
 // specify number of contracts we are trying to compile
 // wrap compile call in a console log call
 // log the output to tell us what the compiler is doing
+// when you run in console: node compile.js
+// log outputs properties: bytecode, interface / contract abi
+// had us remove console log
+// now going to export this big giant object
+// just return details about inbox contract
+// adding contracts property, key value pair of inbox
+// makes it easier to test and deploy
