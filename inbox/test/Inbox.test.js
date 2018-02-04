@@ -28,3 +28,31 @@ const web3 = new Web3 (ganache.provider());
 // Tells instance to connect to provider
 // Will change over time depending on what network you connect to
 // This comes up again with metamask
+
+
+// Mocha Overview
+// Test running framework, test javascript code
+// 3 funtions to work with Mocha
+// it, describe, beforeEach
+// it: run and make an assertion
+// describe: group together it functions
+// beforeEach: execute some general setup code
+
+class Car {
+  park() {
+    return 'stopped';
+  }
+
+  drive() {
+    return 'vroom';
+  }
+}
+// Writing a class we will attempt to test
+
+describe('Car Class dsafs', () => {
+  it('can park' () => {
+    const car = new Car();
+    assert.equal(car.park(), 'stopped');
+  });
+});
+// Car here is just for organiztion purposes
