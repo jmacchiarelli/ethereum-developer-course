@@ -1,5 +1,5 @@
 # ethereum-developer-course
 
-Course work on the Udemy course Ethereum & Solidity: The Complete Developer's Guide
+This repository contains my course work for the Udemy course Ethereum & Solidity: The Complete Developer's Guide
 
-Goal is to complete before ETH Denver 2018
+My goal is to complete this work before ETH Denver 2018
