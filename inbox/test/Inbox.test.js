@@ -29,34 +29,28 @@ const web3 = new Web3(ganache.provider());
 // Will change over time depending on what network you connect to
 // This comes up again with metamask
 
+let accounts;
 
-beforeEach(() => {
-  web3.eth.getAccounts()
-    .then(fethedAccounts => {
-      console.log(fethedAccounts);
-    });
+beforeEach(async () => {
+  accounts = await web3.eth.getAccounts();
 
-// Deploying a contract is something we do every time we run a test
-// Use web3 to get a list of all accounts
-// Returns a promise that gets resolved with a list of accts we care about
-// Chain on a dot then, function call with list of accounts
-// Console log the output
-
+// Define variable ahead of time with let keyword
+// Whenever this file is executed the accounts varuable will be defined
+// The before each statement will run
+// Grab the list of accounts
+// Wait for that request to be completed
+// Assign that list of accounts to the accounts variable
+// The we can add a statement in our it block
 
 // Use one of those accounts to deploy
 // The contract
-
 });
 
 describe('Inbox', () => {
   it('deploys a contract', () => {
-
+    console.log(accounts);
   });
 });
-
-
-
-
 
 
 
