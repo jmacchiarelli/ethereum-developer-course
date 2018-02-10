@@ -29,11 +29,20 @@ const web3 = new Web3(ganache.provider());
 // Will change over time depending on what network you connect to
 // This comes up again with metamask
 
+const { interface, bytecode} = require('../compile');
+// Produced by compile.js file
+// Used Solidity compiler to compile our contract
+// Returning only the definition of the contract inbox
+// Interface is the javascript abi
+// Bytecode is the raw compiled contract
+// Import both those properties from complile js in to test file
+
+
 let accounts;
+let inbox;
 
 beforeEach(async () => {
   accounts = await web3.eth.getAccounts();
-
 // Define variable ahead of time with let keyword
 // Whenever this file is executed the accounts varuable will be defined
 // The before each statement will run
@@ -42,16 +51,27 @@ beforeEach(async () => {
 // Assign that list of accounts to the accounts variable
 // The we can add a statement in our it block
 
-// Use one of those accounts to deploy
+// Use one of the accounts to deploy
 // The contract
+inbox = await new web3.eth.Contract(JSON.parse(interface))
+  .deploy({ data: bytecode, arguments: ['Hi there!'] })
+  .send({ from: accounts[0], gas: '1000000' })
 });
+// Creating an instance of a contract
+// Pass in JSON interface
+// Call dot deploy method to chain on to object returned
+// Pass in an object, 2 properties assigned to it
+// Initial startup arguments for our contract
+// Specify account we want to deploy the contract from
+// Assign the contract to the inbox variable
+// Async operation so add in await keyword
 
 describe('Inbox', () => {
   it('deploys a contract', () => {
-    console.log(accounts);
+    console.log(inbox);
   });
 });
-
+// Console log of inbox
 
 
 // Mocha Overview
