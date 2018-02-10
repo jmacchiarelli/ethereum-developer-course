@@ -18,25 +18,21 @@ const ganache = require('ganache-cli');
 // v1 support for promises, async/wait
 // Stephen says no callbacks, no spaghettti code
 
-// How Web3 is organized
-// Use constructor to make an instance of web3
+// How Web3 is organized, use constructor to make an instance of web3
 // Have to set up a provider to comm between web3 and ethereum network
 const Web3 = require('web3');
 
 // Adding for workaround of known issue
 const provider = ganache.provider();
 
-// Setup local isntance of web3
-// Tells instance to connect to provider
+// Setup local isntance of web3, tells instance to connect to provider
 // Will change over time depending on what network you connect to
 // This comes up again with metamask
 const web3 = new Web3(provider);
 
-// Produced by compile.js file
-// Used Solidity compiler to compile our contract
+// Produced by compile.js file, used Solidity compiler to compile our contract
 // Returning only the definition of the contract inbox
-// Interface is the javascript abi
-// Bytecode is the raw compiled contract
+// Interface is the javascript abi, Bytecode is the raw compiled contract
 // Import both those properties from complile js in to test file
 const { interface, bytecode } = require('../compile');
 
@@ -64,11 +60,23 @@ inbox = await new web3.eth.Contract(JSON.parse(interface))
 inbox.setProvider(provider);
 });
 
-// Test contract deployment
+// Test contract deployment, default message, set message
 describe('Inbox', () => {
   it('deploys a contract', () => {
     assert.ok(inbox.options.address);
   });
+
+  it('has a default message', async () => {
+    const message = await inbox.methods.message().call();
+    assert.equal(message, 'Hi there!');
+  });
+
+  it('it can change the message', async () => {
+    await inbox.methods.setMessage('bye').send({ from: accounts[0] });
+    const message = await inbox.methods.message().call();
+    assert.equal(message, 'bye');
+  });
+
 });
 
 
