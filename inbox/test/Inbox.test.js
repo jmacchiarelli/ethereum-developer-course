@@ -29,7 +29,7 @@ const web3 = new Web3(ganache.provider());
 // Will change over time depending on what network you connect to
 // This comes up again with metamask
 
-const { interface, bytecode} = require('../compile');
+const { interface, bytecode } = require('../compile');
 // Produced by compile.js file
 // Used Solidity compiler to compile our contract
 // Returning only the definition of the contract inbox
@@ -51,12 +51,12 @@ beforeEach(async () => {
 // Assign that list of accounts to the accounts variable
 // The we can add a statement in our it block
 
-// Use one of the accounts to deploy
-// The contract
+
 inbox = await new web3.eth.Contract(JSON.parse(interface))
   .deploy({ data: bytecode, arguments: ['Hi there!'] })
   .send({ from: accounts[0], gas: '1000000' })
 });
+// Use one of the accounts to deploy the contract
 // Creating an instance of a contract
 // Pass in JSON interface
 // Call dot deploy method to chain on to object returned
@@ -72,7 +72,6 @@ describe('Inbox', () => {
   });
 });
 // Console log of inbox
-
 
 // Mocha Overview
 // Test running framework, test javascript code
