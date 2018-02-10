@@ -1,11 +1,10 @@
-const assert = require('assert');
 // assert module, standard library in node js runtime
 // making assertions about tests
+const assert = require('assert');
 
-const ganache = require('ganache-cli');
 // local ethereum test network
+const ganache = require('ganache-cli');
 
-const Web3 = require('web3');
 // make use of Web3 importing a constructor function
 // used to create intstances of the Web3 library
 // instance of Web3, assign the instance to a variable that is lowercase
@@ -22,57 +21,56 @@ const Web3 = require('web3');
 // How Web3 is organized
 // Use constructor to make an instance of web3
 // Have to set up a provider to comm between web3 and ethereum network
+const Web3 = require('web3');
 
-const web3 = new Web3(ganache.provider());
+// Adding for workaround of known issue
+const provider = ganache.provider();
+
 // Setup local isntance of web3
 // Tells instance to connect to provider
 // Will change over time depending on what network you connect to
 // This comes up again with metamask
+const web3 = new Web3(provider);
 
-const { interface, bytecode } = require('../compile');
 // Produced by compile.js file
 // Used Solidity compiler to compile our contract
 // Returning only the definition of the contract inbox
 // Interface is the javascript abi
 // Bytecode is the raw compiled contract
 // Import both those properties from complile js in to test file
+const { interface, bytecode } = require('../compile');
 
-
+// Define variables ahead of time with let keyword
 let accounts;
 let inbox;
 
-beforeEach(async () => {
-  accounts = await web3.eth.getAccounts();
-// Define variable ahead of time with let keyword
-// Whenever this file is executed the accounts varuable will be defined
-// The before each statement will run
 // Grab the list of accounts
 // Wait for that request to be completed
 // Assign that list of accounts to the accounts variable
-// The we can add a statement in our it block
+beforeEach(async () => {
+  accounts = await web3.eth.getAccounts();
 
-
+// Use one of those accounts to deploy the contract
+// Async operation by adding in await keyword
+// Assign the contract to the inbox variable
+// Pass in json interface
+// Call dot deploy to tell web3 to deploy a new copy of this contract
+// Pass in an object with two properties, bytecode, arguments
+// Call dot send to well web3 to send a txn that creats this contract
 inbox = await new web3.eth.Contract(JSON.parse(interface))
   .deploy({ data: bytecode, arguments: ['Hi there!'] })
   .send({ from: accounts[0], gas: '1000000' })
-});
-// Use one of the accounts to deploy the contract
-// Creating an instance of a contract
-// Pass in JSON interface
-// Call dot deploy method to tell web3 to deploy a new copy of this contract
-// Pass in an object, 2 properties bytecode, arguments
-// Call dot send to tell web3 to send out a txn that creates this contract
-// Assign the contract to the inbox variable
-// Async operation so add in await keyword
 
+inbox.setProvider(provider);
+});
+
+// Test contract deployment
 describe('Inbox', () => {
   it('deploys a contract', () => {
     assert.ok(inbox.options.address);
   });
 });
-// If an address exists here it was successfully deployed
-// Assert is part of node standard lib
-// Ok method makes sure it is a defined value
+
 
 
 // Mocha Overview
