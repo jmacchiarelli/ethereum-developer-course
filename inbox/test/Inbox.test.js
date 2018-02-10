@@ -59,19 +59,21 @@ inbox = await new web3.eth.Contract(JSON.parse(interface))
 // Use one of the accounts to deploy the contract
 // Creating an instance of a contract
 // Pass in JSON interface
-// Call dot deploy method to chain on to object returned
-// Pass in an object, 2 properties assigned to it
-// Initial startup arguments for our contract
-// Specify account we want to deploy the contract from
+// Call dot deploy method to tell web3 to deploy a new copy of this contract
+// Pass in an object, 2 properties bytecode, arguments
+// Call dot send to tell web3 to send out a txn that creates this contract
 // Assign the contract to the inbox variable
 // Async operation so add in await keyword
 
 describe('Inbox', () => {
   it('deploys a contract', () => {
-    console.log(inbox);
+    assert.ok(inbox.options.address);
   });
 });
-// Console log of inbox
+// If an address exists here it was successfully deployed
+// Assert is part of node standard lib
+// Ok method makes sure it is a defined value
+
 
 // Mocha Overview
 // Test running framework, test javascript code
