@@ -30,6 +30,36 @@ const web3 = new Web3(ganache.provider());
 // This comes up again with metamask
 
 
+beforeEach(() => {
+  web3.eth.getAccounts()
+    .then(fethedAccounts => {
+      console.log(fethedAccounts);
+    });
+
+// Deploying a contract is something we do every time we run a test
+// Use web3 to get a list of all accounts
+// Returns a promise that gets resolved with a list of accts we care about
+// Chain on a dot then, function call with list of accounts
+// Console log the output
+
+
+// Use one of those accounts to deploy
+// The contract
+
+});
+
+describe('Inbox', () => {
+  it('deploys a contract', () => {
+
+  });
+});
+
+
+
+
+
+
+
 // Mocha Overview
 // Test running framework, test javascript code
 // 3 funtions to work with Mocha
@@ -37,34 +67,34 @@ const web3 = new Web3(ganache.provider());
 // it: run and make an assertion
 // describe: group together it functions
 // beforeEach: execute some general setup code
+// Test that was set up are not commented out below
 
-class Car {
-  park() {
-    return 'stopped';
-  }
+// class Car {
+//  park() {
+//  }
 
-  drive() {
-    return 'vroom';
-  }
-}
+//  drive() {
+//    return 'vroom';
+//  }
+// }
 // Writing a class we will attempt to test
 
-let car;
+// let car;
 // define car variable ahead of time with let
 
-beforeEach (() => {
-  car = new Car();
-});
+// beforeEach (() => {
+//  car = new Car();
+// });
 // beforeEach is for common initialiation code
 
-describe('Car', () => {
-  it('can park', () => {
-    assert.equal(car.park(), 'stopped');
-  });
+// describe('Car', () => {
+//  it('can park', () => {
+//    assert.equal(car.park(), 'stopped');
+//  });
 
-  it('can drive', () => {
-    assert.equal(car.drive(), 'vroom');
-  })
-});
+//  it('can drive', () => {
+//    assert.equal(car.drive(), 'vroom');
+//  })
+// });
 // Testing if we call park if the string stopped is returned
 // Adding another it statement to test drive
