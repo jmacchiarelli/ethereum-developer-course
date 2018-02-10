@@ -49,14 +49,20 @@ class Car {
 }
 // Writing a class we will attempt to test
 
-describe('Car Class dsafs', () => {
+let car;
+// define car variable ahead of time with let
+
+beforeEach (() => {
+  car = new Car();
+});
+// beforeEach is for common initialiation code
+
+describe('Car', () => {
   it('can park', () => {
-    const car = new Car();
     assert.equal(car.park(), 'stopped');
   });
 
   it('can drive', () => {
-    const car = new Car();
     assert.equal(car.drive(), 'vroom');
   })
 });
