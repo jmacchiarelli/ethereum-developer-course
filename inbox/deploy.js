@@ -11,7 +11,7 @@ const secretsPath = path.resolve(__dirname, '../../secrets', 'metamask-acct1-ude
 const secretWords = fs.readFileSync(secretsPath, 'utf8');
 
 // Which account we want to unlock
-// Specify what outside node or api we want to conect to
+// Specify what outside node or api we want to connect to
 // Add account mnemonic, but instead its been hidden in a local dir
 const provider = new HDWalletProvider(
   secretWords,
