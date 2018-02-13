@@ -24,4 +24,9 @@ contract Lottery {
     function random() private view returns (uint) {
         return uint(keccak256(block.difficulty, now, players));
     }
+
+// Using a module function % to pick a winner
+    function pickWinnter() public {
+        uint index = random() % players.length;
+    }
 }
