@@ -26,7 +26,10 @@ contract Lottery {
     }
 
 // Using a module function % to pick a winner
-    function pickWinnter() public {
+// Select address, send money from inside the contract
+// This is a ref to the curent contract, balance it has avail to it
+    function pickWinner() public {
         uint index = random() % players.length;
+        players[index].transfer(this.balance);
     }
 }
