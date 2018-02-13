@@ -28,8 +28,10 @@ contract Lottery {
 // Using a module function % to pick a winner
 // Select address, send money from inside the contract
 // This is a ref to the curent contract, balance it has avail to it
+// Reset lottery with a dynamic array, initialized empty with length of 0
     function pickWinner() public {
         uint index = random() % players.length;
         players[index].transfer(this.balance);
+        players = new address[](0);
     }
 }
