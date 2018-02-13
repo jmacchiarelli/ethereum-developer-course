@@ -29,9 +29,17 @@ contract Lottery {
 // Select address, send money from inside the contract
 // This is a ref to the curent contract, balance it has avail to it
 // Reset lottery with a dynamic array, initialized empty with length of 0
-    function pickWinner() public {
+// Picking a winner is restricted to the manager
+    function pickWinner() public restricted {
         uint index = random() % players.length;
         players[index].transfer(this.balance);
         players = new address[](0);
+    }
+
+// Adding a function modifier to restrict use of manager privileges
+// Underscore means run rest of code in the function this is used in
+    modifier restricted() {
+        require(msg.sender == manager);
+        _;
     }
 }
