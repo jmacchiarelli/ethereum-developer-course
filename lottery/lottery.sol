@@ -44,7 +44,7 @@ contract Lottery {
     }
 
 // Get back a list of addresses
-    function getPlayers public view returns (address[]) {
+    function getPlayers() public view returns (address[]) {
         return players;
     }
 }
