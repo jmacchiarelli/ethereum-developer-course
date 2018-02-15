@@ -92,4 +92,37 @@ describe('Lottery Contract', () => {
       assert(err);
     }
   });
+
+// End to end test, verify the winner receives some amount of money
+// Pick winner is random so instead of writing a lot of logic, only enter 1 player to contract
+  it('sends money to the winner and resets the players array', async () => {
+    await lottery.methods.enter().send({
+      from: accounts[0],
+      value: web3.utils.toWei('2', 'ether')
+    });
+
+// Figure out winner, retreive the acct balance before and after calling pickWinner
+// Returns amount in Wei, account should receive the eth they sent in
+// Due to spending gas the difference on the amount may be a little less than 2
+    const initialBalance = await web3.eth.getBalance(accounts[0]);
+    await lottery.methods.pickWinner().send({ from: accounts[0] });
+    const finalBalance = await web3.eth.getBalance(accounts[0]);
+    const difference = finalBalance - initialBalance;
+
+//    console.log(finalBalance - initialBalance);
+    assert(difference > web3.utils.toWei('1.8', 'ether'));
+
+// Get list of players, assert player list is reset
+    const players = await lottery.methods.getPlayers().call({
+      from: accounts[0]
+    });
+
+    assert.equal(0, players.length);
+
+// Get contract balance, assert it has no balance
+    const contractBalance = await lottery.methods.getBalance().call();
+    console.log(contractBalance);
+    assert.equal(0, contractBalance);
+
+  });
 });

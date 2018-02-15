@@ -47,4 +47,9 @@ contract Lottery {
     function getPlayers() public view returns (address[]) {
         return players;
     }
+
+// Get balance of contract
+    function getBalance() returns (uint bal) {
+      return this.balance; // balance is "inherited" from the address type
+    }
 }
