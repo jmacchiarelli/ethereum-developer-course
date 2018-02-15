@@ -65,12 +65,27 @@ describe('Lottery Contract', () => {
   });
 
 // Test to require min, sending under req amt
-// Using catch to make sure there is an error
+// Using try - catch to make sure there is an error, if not fail test
+// assert(false) is if we get this far fail test
   it('requires a minimum amount of ether to enter', async () => {
     try {
       await lottery.methods.enter().send({
         from: accounts[0],
         value: 200
+      });
+      assert(false);
+    } catch (err) {
+      assert(err);
+    }
+  });
+
+// If someone other than manager calls pickWinner throw a error
+// Dont have to call enter in the contract here, can just call pickWinner
+// Should immediately get kicked out bc of the restrict modifier
+  it('only manager can call pickWinner', async () => {
+    try {
+      await lottery.methods.pickWinner().send({
+        from: accounts[1]
       });
       assert(false);
     } catch (err) {
