@@ -64,4 +64,17 @@ describe('Lottery Contract', () => {
   assert.equal(3, players.length);
   });
 
+// Test to require min, sending under req amt
+// Using catch to make sure there is an error
+  it('requires a minimum amount of ether to enter', async () => {
+    try {
+      await lottery.methods.enter().send({
+        from: accounts[0],
+        value: 200
+      });
+      assert(false);
+    } catch (err) {
+      assert(err);
+    }
+  });
 });
