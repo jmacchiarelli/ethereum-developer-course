@@ -31,7 +31,7 @@ class App extends Component {
 
     await lottery.methods.enter().send({
       from: accounts[0],
-      value: web3.utils.toWei(this.state.value, 'ether');
+      value: web3.utils.toWei(this.state.value, 'ether')
     });
   };
 
